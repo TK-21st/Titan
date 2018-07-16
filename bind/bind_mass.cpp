@@ -5,18 +5,29 @@ namespace py = pybind11;
 
 void bind_sim(py::module &){
     py::class_<Mass>(m, "Mass")
-            .def(py::init<const std::string &>())
+
+            //Check that the constructors work
+            .def(py:init<>())
+            .def(py::init<(void (Mass::*)(struct CUDA_MASS &mass))>())
+            .def(py:init<const Vec & position, double mass = 0.1, bool fixed = false, double dt = 0.0001>())
+
+
             .def("setMass", &Mass::setMass)
             .def("setPos", &Mass::setPos)
             .def("setVel", &Mass::setVel)
             .def("setAcc", &Mass::setAcc)
-            .def("setMass", &Mass::setMass)
-            .def("setMass", &Mass::setMass)
-            .def("setMass", &Mass::setMass)
-            .def("setMass", &Mass::setMass)
-            .def("setMass", &Mass::setMass)
-            .def("setMass", &Mass::setMass)
-            .def("setMass", &Mass::setMass)
-            .def("setMass", &Mass::setMass)
-
+            .def("setForce", &Mass::setForce)
+            .def("setDeltaT", &Mass::setDeltaT)
+            .def("translate", &Mass::translate)
+            .def("makeFixed", &Mass::makeFixed)
+            .def("makeMovable", &Mass::makeMovable)
+            .def("isFixed", &Mass::isFixed)
+            .def("getMass", &Mass::getMass)
+            .def("getPosition", &Mass::getPosition)
+            .def("getVelocity", &Mass::getVelocity)
+            .def("getAcceleration", &Mass::getAcceleration)
+            .def("getForce", &Mass::getForce)
+            .def("time", &Mass::time)
+            .def("deltat", &Mass::deltat)
+            .def("stepTime", &Mass::stepTime);
 }

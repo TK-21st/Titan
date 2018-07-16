@@ -8,17 +8,15 @@ namespace py = pybind11;
 #include <cuda.h>
 #include <cuda_device_runtime_api.h>
 
-#include <iostream>
 
-
-
+//Declare Bind functions
 void bind_mass(py::module &);
 void bind_spring(py::module &);
 void bind_sim(py::module &);
 void bind_object(py::module &);
 void bind_vec(py::module &);
 
-
+//Create Module
 PYBIND11_MODULE(sim, m) {
     bind_mass(m);
     bind_spring(m);
